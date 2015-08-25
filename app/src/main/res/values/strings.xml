@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Unlocator (Netflix)</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="api_key_default">8c778eec9d9ce80dcac2fe</string>
+    <string name="api_key_label">Settings</string>
+</resources>

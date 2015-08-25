@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/default_padding"
+    android:paddingRight="@dimen/default_padding"
+    android:animateLayoutChanges="true">
+
+    <TextView
+        android:id="@+id/api_key_thingy"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/api_key_label" />
+
+    <EditText
+        android:id="@+id/api_key_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/api_key_default"
+        android:visibility="gone" />
+</LinearLayout>
