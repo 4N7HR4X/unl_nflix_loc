@@ -164,12 +164,8 @@ public class MainActivity extends Activity implements PoopAdapter.Listener, ApiK
 
                 HttpUrl url = new HttpUrl.Builder()
                         .scheme("http")
-//                        .host("unlocator.com")
                         .host("unlo.it")
-//                        .addPathSegment("tool")
-//                        .addPathSegment("api.php")
-                        .addPathSegment("59cf0c0244f77c3")
-//                        .addQueryParameter("api_key", apiKey)
+                        .addPathSegment(getString(R.string.unlocator_api_url_key))
                         .addQueryParameter("channel", service.name().toLowerCase())
                         .addQueryParameter("country", item)
                         .build();
