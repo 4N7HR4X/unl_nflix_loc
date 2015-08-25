@@ -3,5 +3,5 @@
     <string name="hello_world">Hello world!</string>
     <string name="api_key_default">8c778eec9d9ce80dcac2fe</string>
     <string name="api_key_label">Settings</string>
-    <string name="unlocator_api_url_key">59cf0c0244f77c3</string>
+    <string name="unlocator_api_url_key">PUT_YOUR_SHORT_URL_KEY_HERE</string>
 </resources>

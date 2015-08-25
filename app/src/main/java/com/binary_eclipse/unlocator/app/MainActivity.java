@@ -1,7 +1,9 @@
 package com.binary_eclipse.unlocator.app;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiInfo;
@@ -40,6 +42,8 @@ public class MainActivity extends Activity implements PoopAdapter.Listener, ApiK
     List<String> netflixRegions;
 
     public static int PRETTY_PRINT_INDENT_FACTOR = 4;
+
+    public static final String POOP = "PUT_YOUR_SHORT_URL_KEY_HERE";
 
     ApiKeyViewHolder holder;
     private String apiKey;
@@ -151,50 +155,63 @@ public class MainActivity extends Activity implements PoopAdapter.Listener, ApiK
     }
 
     private void updateRegion(final Service service, final String item) {
-        new AsyncTask<Void, Void, String>() {
 
-            @Override
-            protected void onPreExecute() {
-                super.onPreExecute();
-                setProgress(true);
-            }
 
-            @Override
-            protected String doInBackground(Void... params) {
+        final String string = getString(R.string.unlocator_api_url_key);
+        if (POOP.equals(string)) {
+            new AlertDialog.Builder(this).setTitle("API Key!").setMessage("Go to unlocator.com and " +
+                    "copy the key part of the shortened URL (http://unlo.it/<key>) of the \"Your Private API Key and URL\" " +
+                    "into unlocator_api_url_key in strings.xml").setNegativeButton("k...", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
 
-                HttpUrl url = new HttpUrl.Builder()
-                        .scheme("http")
-                        .host("unlo.it")
-                        .addPathSegment(getString(R.string.unlocator_api_url_key))
-                        .addQueryParameter("channel", service.name().toLowerCase())
-                        .addQueryParameter("country", item)
-                        .build();
-
-                OkHttpClient client = new OkHttpClient();
-                Request request = new Request.Builder()
-                        .get()
-                        .url(url)
-                        .build();
-                Call call = client.newCall(request);
-
-                Response response = null;
-                try {
-                    response = call.execute();
-                    ResponseBody body = response.body();
-                    return body.string();
-                } catch (IOException e) {
-                    e.printStackTrace();
                 }
-                return null;
-            }
+            }).create().show();
+        } else {
+            new AsyncTask<Void, Void, String>() {
 
-            @Override
-            protected void onPostExecute(String s) {
-                setProgress(false);
-                super.onPostExecute(s);
-                Toast.makeText(MainActivity.this, s, Toast.LENGTH_SHORT).show();
-            }
-        }.execute();
+                @Override
+                protected void onPreExecute() {
+                    super.onPreExecute();
+                    setProgress(true);
+                }
+
+                @Override
+                protected String doInBackground(Void... params) {
+                    HttpUrl url = new HttpUrl.Builder()
+                            .scheme("http")
+                            .host("unlo.it")
+                            .addPathSegment(string)
+                            .addQueryParameter("channel", service.name().toLowerCase())
+                            .addQueryParameter("country", item)
+                            .build();
+
+                    OkHttpClient client = new OkHttpClient();
+                    Request request = new Request.Builder()
+                            .get()
+                            .url(url)
+                            .build();
+                    Call call = client.newCall(request);
+
+                    Response response = null;
+                    try {
+                        response = call.execute();
+                        ResponseBody body = response.body();
+                        return body.string();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    return null;
+                }
+
+                @Override
+                protected void onPostExecute(String s) {
+                    setProgress(false);
+                    super.onPostExecute(s);
+                    Toast.makeText(MainActivity.this, s, Toast.LENGTH_SHORT).show();
+                }
+            }.execute();
+        }
     }
 
     @Override
