@@ -8,10 +8,16 @@
     android:animateLayoutChanges="true">
 
     <TextView
-        android:id="@+id/api_key_thingy"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/api_key_label" />
+        android:gravity="right" />
+    <ImageView
+        android:id="@+id/api_key_thingy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:layout_gravity="right"
+        android:src="@android:drawable/ic_menu_manage"/>
 
     <EditText
         android:id="@+id/api_key_input"

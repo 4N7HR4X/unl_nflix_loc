@@ -8,8 +8,7 @@
         android:id="@+id/api_key_stuffing"
         layout="@layout/api_key_section"
         android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:visibility="gone"/>
+        android:layout_width="match_parent" />
 
     <FrameLayout
         android:id="@+id/progress_view"
